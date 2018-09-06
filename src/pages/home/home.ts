@@ -11,4 +11,8 @@ export class HomePage {
 
   }
 
+  public goToNewReport() {
+    this.navCtrl.push('ReportPage');
+  }
+
 }
