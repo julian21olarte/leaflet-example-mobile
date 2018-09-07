@@ -16,11 +16,13 @@ export class LocationProvider {
   }
 
   public getCoords() {
-    return this.geolocation.watchPosition({
+    return this.geolocation.getCurrentPosition({
       enableHighAccuracy: true,
       timeout: 60000,
       maximumAge: 3600000
-    });
+    }).then(resp => {
+        return { lat: resp.coords.latitude, lng: resp.coords.longitude };
+      });
   }
 
 }

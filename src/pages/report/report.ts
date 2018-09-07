@@ -27,14 +27,14 @@ export class ReportPage {
   }
 
   ionViewDidLoad() {
-    this.map = L.map('map').fitWorld().setView([7.8939100, -72.5078200], 12);
+    this.map = L.map('map').fitWorld().setView([7.8939100, -72.5078200], 11);
     L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 18,
       // tslint:disable-next-line:max-line-length
-      attribution: 'Cloud Analytic transport <a href="https://www.github.com/julian21olarte/">julian21olarte</a> - <a href="https://www.github.com/brayammora">brayammora</a>'
+      //attribution: 'Cloud Analytic transport <a href="https://www.github.com/julian21olarte/">julian21olarte</a> - <a href="https://www.github.com/brayammora">brayammora</a>'
     }).addTo(this.map);
 
-    this.marker = this.markerProvider.createMarker(7.8939100, -72.5071200, 'INFO', 'Cucuta', {draggable: true});
+    this.marker = this.markerProvider.createMarker(7.8939100, -72.5071200, 'USER', 'Cucuta', {draggable: true});
     this.marker.addTo(this.map);
 
 
@@ -56,19 +56,32 @@ export class ReportPage {
 
     // on click map event for relocate marker
     this.map.on('click', (event) => {
-      this.marker.setLatLng(L.latLng(event.latlng.lat, event.latlng.lng));
+      this.setMarkerPosition(event.latlng.lat, event.latlng.lng);
     });
   }
 
+  // locate the marker and view on getLocation service is actived (with move animation)
   public locate() {
     this.locationProvider.getCoords()
-    .subscribe(coords => {
+    .then(coords => {
       console.log(coords);
+      this.setMarkerPosition(coords.lat, coords.lng);
+      this.map.setView(L.latLng(coords.lat, coords.lng), this.map.getZoom(), {
+        "animate": true,
+        "pan": {
+          "duration": 3
+        }
+      });
     })
   }
 
   public nextForm() {
 
+  }
+
+  // set marker latitude and longitude
+  private setMarkerPosition(lat: number, lng: number) {
+    this.marker.setLatLng(L.latLng(lat, lng));
   }
 
 }

@@ -35,6 +35,7 @@ export class MarkerProvider {
       case 'DANGER':  return {icon: 'exclamation', markerColor: 'red'};
       case 'INFO':    return {icon: 'info', markerColor: 'blue'};
       case 'HOLE':    return {icon: 'road', markerColor: 'black'};
+      case 'USER':    return {icon: 'user', markerColor: 'blue'};
     }
   }
 
