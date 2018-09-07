@@ -1,7 +1,7 @@
 import { LocationProvider } from './../../providers/location/location';
 import { MarkerProvider } from './../../providers/marker/marker';
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, Slides } from 'ionic-angular';
 import * as L from 'leaflet';
 
 /**
@@ -22,11 +22,16 @@ export class ReportPage {
   public layers: Array<any>;
   public marker: any;
   public map: any;
+  public iconType: string;
+  public firstSlide: boolean;
+  @ViewChild(Slides) slides: Slides;
   constructor(public navCtrl: NavController, public navParams: NavParams, public markerProvider: MarkerProvider, public locationProvider: LocationProvider) {
-    
+    this.iconType = 'arrow-forward';
+    this.firstSlide = true;
   }
 
   ionViewDidLoad() {
+    this.slides.lockSwipes(true);
     this.map = L.map('map').fitWorld().setView([7.8939100, -72.5078200], 11);
     L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 18,
@@ -82,6 +87,20 @@ export class ReportPage {
   // set marker latitude and longitude
   private setMarkerPosition(lat: number, lng: number) {
     this.marker.setLatLng(L.latLng(lat, lng));
+  }
+
+  public nextSlide() {
+    this.slides.lockSwipes(false);
+    this.slides.slideNext(500);
+    this.slides.lockSwipes(true);
+    if(this.slides.isEnd()) {
+      this.iconType = 'checkmark';
+    }
+    if(this.slides.isBeginning()) {
+      this.firstSlide = true;
+    } else {
+      this.firstSlide = false;
+    }
   }
 
 }
