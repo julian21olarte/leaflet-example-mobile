@@ -2,4 +2,21 @@ page-report {
   /*.awesome-marker {
     transition: ease-in 3s all;
   }*/
+  animation: opacity-show 2s linear;
+  ion-icon.page-icon {
+    font-size: 4em;
+    margin: 15px 0;
+  }
+  ion-icon:not(.page-icon) {
+    font-size: 2em;
+  }
+}
+
+@keyframes opacity-show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

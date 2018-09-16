@@ -1,0 +1,13 @@
+page-comunity {
+  animation: opacity-show 2s linear;
+}
+
+
+@keyframes opacity-show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

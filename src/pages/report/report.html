@@ -6,16 +6,28 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Report</ion-title>
+  <ion-navbar color="bar">
+    <ion-title>Reporte</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
   <!--<div style="height: 300px;" leaflet [leafletOptions]="options" [leafletLayers]="layers" (leafletClick)="getCoordenatesOnClick($event)">
   </div>-->
+    
+  <ion-fab top right *ngIf="firstSlide">
+    <button ion-fab margin-bottom (click)="locate()"><ion-icon name="locate"></ion-icon></button>
+  </ion-fab>
+
+  <ion-fab bottom right>
+    <button ion-fab color="success" [disabled]="!firstSlide && !typeSelected" (click)="nextSlide()"><ion-icon [name]="iconType"></ion-icon></button>
+  </ion-fab>
+
+  <ion-fab bottom left *ngIf="!firstSlide">
+    <button ion-fab color="info" (click)="prevSlide()"><ion-icon name="arrow-back"></ion-icon></button>
+  </ion-fab>
   <ion-slides>
 
     <ion-slide>
@@ -23,19 +35,63 @@
     </ion-slide>
   
     <ion-slide>
-      <h2>Slide 2</h2>
+      <h1 ion-text color="bar">¿Que quieres reportarnos?</h1>
+      <ion-icon class="page-icon" name="checkmark-circle" color="primary"></ion-icon>
+      <ion-list margin-top radio-group [(ngModel)]="typeSelected">
+        <ion-item>
+            <ion-avatar item-left>
+              <ion-icon name="leaf" color="primary"></ion-icon>
+            </ion-avatar>
+          <ion-label> Ambiental</ion-label>
+          <ion-radio value="BAD_ROAD"></ion-radio>
+        </ion-item>
+        <ion-item>
+            <ion-avatar item-left>
+              <ion-icon name="home" color="primary"></ion-icon>
+            </ion-avatar>
+          <ion-label> Infraestructura</ion-label>
+          <ion-radio value="TRAFFIC"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-avatar item-left>
+            <ion-icon name="lock" color="primary"></ion-icon>
+          </ion-avatar>
+          <ion-label> Inseguridad</ion-label>
+          <ion-radio value="VILLAIN"></ion-radio>
+        </ion-item>
+      </ion-list>
     </ion-slide>
   
     <ion-slide>
-      <h2>Slide 3</h2>
+      <h1 ion-text color="bar">Toma una foto</h1>
+      <ion-icon class="page-icon" name="images" color="primary"></ion-icon>
+      <ion-card margin-bottom>
+        <ion-card-content>
+          <img src="assets/imgs/hueco.jpg" width="100%" height="50%" alt="">
+          <button ion-button round>Tomar foto</button>
+          <button ion-button color="yellow" round>Subir imagen</button>
+        </ion-card-content>
+      </ion-card>
+    </ion-slide>
+
+    <ion-slide>
+      <h1 ion-text color="bar">Completa los datos</h1>
+      <ion-icon class="page-icon" name="create" color="primary"></ion-icon>
+      <ion-card>
+        <ion-card-content>
+          <ion-list >
+            <ion-item>
+              <ion-label color="primary" floating>Titulo</ion-label>
+              <ion-input value="Hueco en avenida Guaimaral"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label color="primary" floating>Descripcion</ion-label>
+              <ion-textarea height="500px" value="Hueco que obstruye la movilidad"></ion-textarea>
+            </ion-item>
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
     </ion-slide>
   
   </ion-slides>
-  
-  <ion-fab top right>
-    <button ion-fab margin-bottom *ngIf="firstSlide" (click)="locate()"><ion-icon name="locate"></ion-icon></button>
-  </ion-fab>
-  <ion-fab bottom right>
-    <button ion-fab color="success" (click)="nextSlide()"><ion-icon [name]="iconType"></ion-icon></button>
-  </ion-fab>
 </ion-content>

@@ -1,0 +1,12 @@
+page-points {
+  ion-grid {
+    height: 100%;
+    justify-content: center;
+  }
+  ion-col.center-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center !important;
+    align-items: center;
+  }
+}

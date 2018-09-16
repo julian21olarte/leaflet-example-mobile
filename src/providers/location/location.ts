@@ -21,8 +21,11 @@ export class LocationProvider {
       timeout: 60000,
       maximumAge: 3600000
     }).then(resp => {
-        return { lat: resp.coords.latitude, lng: resp.coords.longitude };
-      });
+      return { lat: resp.coords.latitude, lng: resp.coords.longitude };
+    }).catch(error => {
+      console.log(error);
+      return { lat: 7.898229, lng: -72.487492 };
+    });
   }
 
 }

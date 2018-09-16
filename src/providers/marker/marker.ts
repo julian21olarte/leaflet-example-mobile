@@ -34,8 +34,15 @@ export class MarkerProvider {
       case 'SUCCESS': return {icon: 'location-arrow', markerColor: 'green'};
       case 'DANGER':  return {icon: 'exclamation', markerColor: 'red'};
       case 'INFO':    return {icon: 'info', markerColor: 'blue'};
-      case 'HOLE':    return {icon: 'road', markerColor: 'black'};
-      case 'USER':    return {icon: 'user', markerColor: 'blue'};
+
+      case 'TRASH':    return {icon: 'trash', markerColor: 'brown'}; //basuras
+      case 'HOLE':    return {icon: 'road', markerColor: 'black'}; //hueco
+      case 'VILLAIN':    return {icon: 'user-secret', markerColor: 'black'}; //ladron
+      case 'CRASH':    return {icon: 'car-crash', markerColor: 'red'}; //accidente
+      case 'BAD_ROAD':    return {icon: 'road', markerColor: 'yellow'}; //via en mal estado
+      case 'TRAFFIC':    return {icon: 'traffic-light', markerColor: 'blue'}; //embotellamiento
+
+      case 'USER':    return {icon: 'user', markerColor: 'blue'}; //usuario
     }
   }
 
